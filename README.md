@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="https://aurore-design.ces-sc.fr"><img alt="Version" src="https://img.shields.io/badge/version-v1.5-7c9cff?style=flat-square"></a>
-  <a href="LICENSE"><img alt="Licence" src="https://img.shields.io/badge/licence-CES%20Aurore%20Design%201.0-a78bfa?style=flat-square"></a>
+  <a href="LICENSE"><img alt="Licence CC BY 4.0" src="https://img.shields.io/badge/licence-CC%20BY%204.0-a78bfa?style=flat-square"></a>
   <img alt="Exemples" src="https://img.shields.io/badge/exemples-94-67e8f9?style=flat-square">
   <img alt="React" src="https://img.shields.io/badge/React-18%2B-5b8def?style=flat-square">
   <img alt="Thèmes" src="https://img.shields.io/badge/th%C3%A8mes-clair%20%C2%B7%20sombre-14163f?style=flat-square">
@@ -85,12 +85,14 @@ Le journal détaillé de chaque version est dans [docs/AURORE-DESIGN.md](docs/AU
 
 ## 📜 Licence
 
-**[Licence CES Aurore Design 1.0](LICENSE)** — utilisation, modification et redistribution **libres**, par une personne comme par une **IA**.
-Une seule condition : afficher de façon visible (pied de page, crédits, README ou en-tête de fichier) :
+CES Aurore Design est publié sous **[Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/deed.fr)** — texte officiel dans [LICENSE](LICENSE), avis du CES dans [NOTICE](NOTICE).
 
-> **Basé sur CES Aurore Design v1.5**
+Tu peux **utiliser, copier, modifier et redistribuer**, y compris commercialement et **par une IA**, à condition de **créditer** :
 
-Ne sont pas couverts : le nom et les logos du CES, les marques Star Citizen® / Squadron 42® / RSI®, les captures, les polices (SIL OFL) et les icônes Remix Icon, sous leur licence propre.
+> **Basé sur CES Aurore Design v1.5 — Corps Expéditionnaire Spatial — CC BY 4.0**
+
+…de façon visible (pied de page, crédits, README ou en-tête de fichier), avec un lien vers la licence et la mention des modifications.
+Ne sont pas couverts : le nom et les logos du CES, les marques Star Citizen® / Squadron 42® / RSI®, les captures, les polices (SIL OFL) et les icônes Remix Icon.
 
 ---
 

@@ -5,3 +5,6 @@
 // jamais renumerotes, un numero retire reste vacant.
 // =============================================================================
 export const AURORE = { name: 'Aurore Design', version: '1.5', label: 'Aurore Design V1.5', released: '2026-11-21' };
+// Version EN SERVICE sur le portail de production (aurore-design.ces-sc.fr › « Déployée ») — à mettre à jour à chaque livraison.
+export const AURORE_DEPLOYED = '1.4';
+export const AURORE_LINKS = { site: 'https://aurore-design.ces-sc.fr', github: 'https://github.com/Kalgiio/aurore-design' };
