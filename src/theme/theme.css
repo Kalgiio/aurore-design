@@ -1,0 +1,52 @@
+/* =============================================================================
+   Palette du portail par mode (2026-11-13) — ex-SCHEME_CSS d'index.js + ce que posaient CssVarsProvider et CssBaseline
+   de MUI. Les noms `--mui-palette-*` sont CONSERVÉS : index.css, utils/palette.js et quelques tables de statut les
+   lisent encore. Valeurs identiques à celles en ligne jusqu'ici. Les jetons du design system (tokens.css) restent la
+   référence ; ces variables n'en sont que l'ancien alias.
+   ============================================================================= */
+[data-mui-color-scheme="light"] {
+  --mui-palette-primary-main: #1a56c4;
+  --mui-palette-primary-light: #4d7fd4;
+  --mui-palette-primary-dark: #0d3d9e;
+  --mui-palette-primary-contrastText: #fff;
+  --mui-palette-secondary-main: #4A4F8A;
+  --mui-palette-info-main: #0284c7;
+  --mui-palette-error-main: #c0392b;
+  --mui-palette-success-main: #16a34a;
+  --mui-palette-warning-main: #d97706;
+  --mui-palette-background-default: #E8ECFF;
+  --mui-palette-background-paper: #F2F4FF;
+  --mui-palette-text-primary: #12133A;
+  --mui-palette-text-secondary: #3A4080;
+  --mui-palette-text-disabled: rgba(18,19,58,0.38);
+  --mui-palette-divider: rgba(26,86,196,0.14);
+  --mui-palette-action-hover: rgba(26,86,196,0.07);
+  --mui-palette-action-selected: rgba(26,86,196,0.13);
+  --mui-palette-action-disabled: rgba(18,19,58,0.26);
+  --mui-palette-action-focus: rgba(26,86,196,0.1);
+}
+[data-mui-color-scheme="dark"] {
+  --mui-palette-primary-main: #A8C7FA;
+  --mui-palette-primary-light: #D4E3FF;
+  --mui-palette-primary-dark: #7DACF5;
+  --mui-palette-primary-contrastText: #003583;
+  --mui-palette-secondary-main: #BBC7DB;
+  --mui-palette-info-main: #67d4fb;
+  --mui-palette-error-main: #FFB4AB;
+  --mui-palette-success-main: #34d399;
+  --mui-palette-warning-main: #fbbf24;
+  --mui-palette-background-default: #050511;
+  --mui-palette-background-paper: #0B0C2A;
+  --mui-palette-text-primary: #E2E2E9;
+  --mui-palette-text-secondary: #888EC6;
+  --mui-palette-text-disabled: rgba(226,226,233,0.38);
+  --mui-palette-divider: rgba(168,199,250,0.12);
+  --mui-palette-action-hover: rgba(168,199,250,0.08);
+  --mui-palette-action-selected: rgba(168,199,250,0.16);
+  --mui-palette-action-disabled: rgba(226,226,233,0.38);
+  --mui-palette-action-focus: rgba(168,199,250,0.12);
+}
+/* Ex-CssBaseline (ce que le preflight Tailwind ne couvre pas). */
+html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; -webkit-text-size-adjust: 100%; }
+strong, b { font-weight: 700; }
+@media print { body { background-color: #fff; } }

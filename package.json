@@ -1,0 +1,12 @@
+{
+  "name": "@ces/aurore-design",
+  "version": "1.5.0",
+  "description": "CES Aurore Design — le design system du Corps Expéditionnaire Spatial (React + CSS).",
+  "license": "SEE LICENSE IN LICENSE",
+  "type": "module",
+  "main": "src/components.js",
+  "exports": { ".": "./src/components.js", "./advanced": "./src/advanced.js", "./tokens.css": "./src/tokens.css", "./ds.css": "./src/ds.css", "./advanced.css": "./src/advanced.css" },
+  "peerDependencies": { "react": ">=18", "react-dom": ">=18", "@remixicon/react": ">=4" },
+  "optionalDependencies": { "@dnd-kit/core": "*", "@dnd-kit/sortable": "*", "@dnd-kit/utilities": "*", "@fullcalendar/react": "*", "@fullcalendar/daygrid": "*", "@fullcalendar/timegrid": "*", "@fullcalendar/interaction": "*", "@tiptap/react": "*", "@tiptap/starter-kit": "*" },
+  "homepage": "https://aurore-design.ces-sc.fr"
+}

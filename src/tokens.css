@@ -1,0 +1,205 @@
+/* =============================================================================
+   AURORE DESIGN (design system du CES) — JETONS
+   Inspire de l'architecture d'Aura (PrimeVue) : trois etages.
+
+     1. PRIMITIFS   palettes brutes (--ces-blue-600, --ces-night-950…)
+                    Jamais utilises directement par un composant.
+     2. SEMANTIQUES role d'une couleur (--ds-primary, --ds-surface-card…)
+                    Redefinis par mode : c'est le SEUL etage qui change entre
+                    clair et sombre.
+     3. COMPOSANTS  dans ds.css, construits uniquement sur les semantiques.
+
+   Le mode suit l'attribut `data-mui-color-scheme` pose sur <html> par le
+   portail (index.js) : un seul interrupteur pour l'app et le design system.
+
+   🔴 Les couleurs de marque viennent du thème du portail (theme.js / index.js) :
+   primaire #1a56c4 (clair) et #A8C7FA (sombre), nuit #050511, aurore
+   violet/bleu/cyan (index.css). Une teinte changee ici doit l'etre la-bas.
+   ============================================================================= */
+
+:root {
+  /* --- 1. PRIMITIFS ------------------------------------------------------- */
+
+  /* Bleu CES — 600 = primaire clair du portail, 200 = primaire sombre. */
+  --ces-blue-50:  #eef4ff;
+  --ces-blue-100: #d9e6ff;
+  --ces-blue-200: #a8c7fa;
+  --ces-blue-300: #7dacf5;
+  --ces-blue-400: #4d7fd4;
+  --ces-blue-500: #2f69d6;
+  --ces-blue-600: #1a56c4;
+  --ces-blue-700: #0d3d9e;
+  --ces-blue-800: #0b2f7a;
+  --ces-blue-900: #0a2560;
+  --ces-blue-950: #061538;
+
+  /* Nuit — les surfaces du portail, du papier clair au vide spatial. */
+  --ces-night-0:   #ffffff;
+  --ces-night-50:  #f2f4ff;
+  --ces-night-100: #e8ecff;
+  --ces-night-200: #d8deff;
+  --ces-night-300: #c8d0f0;
+  --ces-night-400: #888ec6;
+  --ces-night-500: #5a5f9a;
+  --ces-night-600: #3a4080;
+  --ces-night-700: #1c1e4a;
+  --ces-night-800: #0f1035;
+  --ces-night-900: #0b0c2a;
+  --ces-night-950: #050511;
+
+  /* Aurore — reprise de l'arriere-plan du portail. */
+  --ces-aurora-violet: #7c3aed;
+  --ces-aurora-blue:   #1d4ed8;
+  --ces-aurora-cyan:   #38bdf8;
+
+  /* Etats */
+  --ces-green-500: #16a34a;  --ces-green-300: #34d399;
+  --ces-cyan-600:  #0891b2;  --ces-cyan-300:  #38bdf8;
+  --ces-amber-600: #d97706;  --ces-amber-300: #fbbf24;
+  --ces-red-600:   #c0392b;  --ces-red-300:   #f87171;
+  --ces-violet-600:#7c3aed;  --ces-violet-300:#a78bfa;
+
+  /* Niveaux de certification (identiques a index.css, mode sombre) */
+  --ces-level-cadet-c:  #86efac;
+  --ces-level-junior-c: #93c5fd;
+  --ces-level-senior-c: #d8b4fe;
+  --ces-level-elite-c:  #fde047;
+
+  /* --- Geometrie, typographie, mouvement (communs aux deux modes) --------- */
+  --ds-font:         'DM Sans Variable', 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
+  --ds-font-display: 'Orbitron', 'DM Sans Variable', 'DM Sans', sans-serif;
+  --ds-font-mono:    'Ubuntu Mono', ui-monospace, 'SFMono-Regular', monospace;
+
+  --ds-radius-xs: 4px;
+  --ds-radius-sm: 6px;    /* champs, puces — l'arrondi d'Aura */
+  --ds-radius-md: 8px;    /* boutons — RADIUS_SM du portail */
+  --ds-radius-lg: 14px;   /* surfaces — RADIUS du portail */
+  --ds-radius-xl: 20px;
+  --ds-radius-pill: 999px;
+
+  --ds-space-1: 4px;  --ds-space-2: 8px;   --ds-space-3: 12px; --ds-space-4: 16px;
+  --ds-space-5: 20px; --ds-space-6: 24px;  --ds-space-8: 32px; --ds-space-10: 40px;
+  --ds-space-12: 48px; --ds-space-16: 64px;
+
+  --ds-text-xs: .75rem; --ds-text-sm: .875rem; --ds-text-md: 1rem;
+  --ds-text-lg: 1.125rem; --ds-text-xl: 1.375rem; --ds-text-2xl: 1.75rem; --ds-text-3xl: 2.25rem;
+
+  --ds-ease: cubic-bezier(.2, .7, .2, 1);
+  --ds-fast: .15s;
+  --ds-base: .22s;
+
+  --ds-control-h-sm: 32px;
+  --ds-control-h:    40px;
+  --ds-control-h-lg: 48px;
+}
+
+/* --- 2. SEMANTIQUES — MODE CLAIR (defaut) --------------------------------- */
+:root,
+[data-mui-color-scheme="light"] {
+  --ds-primary:          var(--ces-blue-600);
+  --ds-primary-hover:    var(--ces-blue-700);
+  --ds-primary-active:   var(--ces-blue-800);
+  --ds-primary-contrast: #ffffff;
+  --ds-primary-soft:     color-mix(in srgb, var(--ces-blue-600) 11%, transparent);
+  --ds-primary-soft-text:var(--ces-blue-700);
+
+  --ds-surface-ground:  var(--ces-night-100);
+  --ds-surface-card:    var(--ces-night-50);
+  --ds-surface-overlay: var(--ces-night-0);
+  --ds-surface-sunken:  var(--ces-night-200);
+  --ds-surface-hover:   color-mix(in srgb, var(--ces-blue-600) 7%, transparent);
+  --ds-surface-inverse: var(--ces-night-900);
+
+  --ds-border:        color-mix(in srgb, var(--ces-blue-600) 16%, transparent);
+  --ds-border-strong: color-mix(in srgb, var(--ces-blue-600) 34%, transparent);
+
+  --ds-text:          #12133a;
+  --ds-text-muted:    var(--ces-night-600);
+  --ds-text-subtle:   var(--ces-night-500);
+  --ds-text-disabled: rgba(18, 19, 58, .38);
+  --ds-text-inverse:  #e2e2e9;
+
+  --ds-success: var(--ces-green-500);  --ds-on-success: #ffffff;
+  --ds-info:    var(--ces-cyan-600);   --ds-on-info:    #ffffff;
+  --ds-warn:    var(--ces-amber-600);  --ds-on-warn:    #ffffff;
+  --ds-danger:  var(--ces-red-600);    --ds-on-danger:  #ffffff;
+  --ds-help:    var(--ces-violet-600); --ds-on-help:    #ffffff;
+  --ds-secondary:    var(--ces-night-600); --ds-on-secondary: #ffffff;
+  --ds-contrast:     var(--ces-night-900); --ds-on-contrast:  #ffffff;
+
+  --ds-focus-ring: 0 0 0 3px color-mix(in srgb, var(--ces-blue-600) 28%, transparent);
+  --ds-shadow-sm: 0 1px 2px rgba(13, 14, 42, .08);
+  --ds-shadow-md: 0 4px 14px rgba(13, 14, 42, .10), 0 1px 3px rgba(13, 14, 42, .06);
+  --ds-shadow-lg: 0 16px 40px rgba(13, 14, 42, .18);
+  --ds-glow:      0 0 0 1px color-mix(in srgb, var(--ces-blue-600) 30%, transparent),
+                  0 8px 28px color-mix(in srgb, var(--ces-aurora-violet) 18%, transparent);
+
+  --ds-aurora: linear-gradient(112deg, var(--ces-aurora-violet), var(--ces-aurora-blue) 52%, var(--ces-aurora-cyan));
+
+  --ces-level-cadet:  #15803d;
+  --ces-level-junior: #1d4ed8;
+  --ces-level-senior: #7e22ce;
+  --ces-level-elite:  #a16207;
+  --ces-level-novice: #6b7280; --ces-level-master: #c2410c; --ces-level-instructor: #0e7490;
+
+  /* Couleurs de texte et surlignage de l'editeur — PAR MODE : le document stocke
+     var(--ds-tc-red), jamais un hexadecimal, donc il reste lisible dans les deux. */
+  --ds-tc-gray: #6b7280; --ds-tc-red: #dc2626; --ds-tc-orange: #ea580c; --ds-tc-yellow: #a16207;
+  --ds-tc-green: #15803d; --ds-tc-blue: #1d4ed8; --ds-tc-purple: #7c3aed; --ds-tc-pink: #db2777;
+  --ds-hl-yellow: #fef08a; --ds-hl-orange: #fed7aa; --ds-hl-red: #fecaca; --ds-hl-green: #bbf7d0;
+  --ds-hl-blue: #bfdbfe; --ds-hl-purple: #e9d5ff; --ds-hl-pink: #fbcfe8; --ds-hl-gray: #e5e7eb;
+}
+
+/* --- 2. SEMANTIQUES — MODE SOMBRE ----------------------------------------- */
+[data-mui-color-scheme="dark"] {
+  --ds-primary:          var(--ces-blue-200);
+  --ds-primary-hover:    var(--ces-blue-100);
+  --ds-primary-active:   var(--ces-blue-50);
+  --ds-primary-contrast: #003583;
+  --ds-primary-soft:     color-mix(in srgb, var(--ces-blue-200) 14%, transparent);
+  --ds-primary-soft-text:var(--ces-blue-100);
+
+  --ds-surface-ground:  var(--ces-night-950);
+  --ds-surface-card:    var(--ces-night-900);
+  --ds-surface-overlay: var(--ces-night-800);
+  --ds-surface-sunken:  #08091f;
+  --ds-surface-hover:   color-mix(in srgb, var(--ces-blue-200) 8%, transparent);
+  --ds-surface-inverse: var(--ces-night-50);
+
+  --ds-border:        color-mix(in srgb, var(--ces-blue-200) 13%, transparent);
+  --ds-border-strong: color-mix(in srgb, var(--ces-blue-200) 30%, transparent);
+
+  --ds-text:          #e2e2e9;
+  --ds-text-muted:    var(--ces-night-400);
+  --ds-text-subtle:   #6a70a8;
+  --ds-text-disabled: rgba(226, 226, 233, .38);
+  --ds-text-inverse:  #12133a;
+
+  --ds-success: var(--ces-green-300);  --ds-on-success: #003820;
+  --ds-info:    var(--ces-cyan-300);   --ds-on-info:    #00283a;
+  --ds-warn:    var(--ces-amber-300);  --ds-on-warn:    #3a2000;
+  --ds-danger:  var(--ces-red-300);    --ds-on-danger:  #450a0a;
+  --ds-help:    var(--ces-violet-300); --ds-on-help:    #1e0b4b;
+  --ds-secondary:    #bbc7db;          --ds-on-secondary: #253140;
+  --ds-contrast:     var(--ces-night-50); --ds-on-contrast: var(--ces-night-900);
+
+  --ds-focus-ring: 0 0 0 3px color-mix(in srgb, var(--ces-blue-200) 30%, transparent);
+  /* Aurore eclaircie en sombre : le bleu profond #1d4ed8 se perdait sur la nuit. */
+  --ds-aurora: linear-gradient(112deg, #a78bfa, #5b8def 52%, #67d4fb);
+  --ds-shadow-sm: 0 1px 2px rgba(0, 0, 0, .4);
+  --ds-shadow-md: 0 6px 18px rgba(0, 0, 0, .45);
+  --ds-shadow-lg: 0 20px 50px rgba(0, 0, 0, .6);
+  --ds-glow:      0 0 0 1px color-mix(in srgb, var(--ces-blue-200) 28%, transparent),
+                  0 10px 34px color-mix(in srgb, var(--ces-aurora-violet) 30%, transparent);
+
+  --ces-level-cadet:  var(--ces-level-cadet-c);
+  --ces-level-junior: var(--ces-level-junior-c);
+  --ces-level-senior: var(--ces-level-senior-c);
+  --ces-level-elite:  var(--ces-level-elite-c);
+  --ces-level-novice: #9ca3af; --ces-level-master: #fb923c; --ces-level-instructor: #67e8f9;
+
+  --ds-tc-gray: #9ca3af; --ds-tc-red: #f87171; --ds-tc-orange: #fb923c; --ds-tc-yellow: #facc15;
+  --ds-tc-green: #4ade80; --ds-tc-blue: #60a5fa; --ds-tc-purple: #c4b5fd; --ds-tc-pink: #f9a8d4;
+  --ds-hl-yellow: rgba(250, 204, 21, .30); --ds-hl-orange: rgba(251, 146, 60, .30); --ds-hl-red: rgba(248, 113, 113, .30); --ds-hl-green: rgba(74, 222, 128, .26);
+  --ds-hl-blue: rgba(96, 165, 250, .30); --ds-hl-purple: rgba(167, 139, 250, .32); --ds-hl-pink: rgba(244, 114, 182, .30); --ds-hl-gray: rgba(156, 163, 175, .26);
+}
