@@ -4,6 +4,7 @@
 // Inspiration : PrimeVue (calendrier, graphiques, tableau de taches, editeur) et
 // shadcn/ui (combobox, fil d'Ariane repliable, menu, palette de commandes, panneau).
 // Memes regles que components.js : jetons uniquement, aucun import MUI.
+import { CmdInsignia, CmdStamp, useUiTheme } from './commandement';
 // Dependances deja presentes dans le portail : @dnd-kit (tableau de taches),
 // FullCalendar (calendrier d'evenements), @remixicon/react (via <Icon>).
 // =============================================================================
@@ -530,9 +531,9 @@ export function EventCalendar({ events: initial }) {
 }
 
 // --- Bandeau d'alerte DEFCON ----------------------------------------------------
-// Pousse TOUTE la page vers le bas (html.ds-alert-on + --ces-alert-h, voir advanced.css).
+// Pousse TOUTE la page vers le bas (html.ds-alert-on + --ces-alert-h, voir advanced.css ; --ces-top = DEFCON + test).
 // 🔴 Les elements position:fixed (barre laterale du portail) doivent ajouter
-// var(--ces-alert-h, 0px) a leur `top` pour ne pas passer sous le bandeau.
+// var(--ces-top, 0px) a leur `top` pour ne pas passer sous le bandeau.
 export const DEFCON = {
   5: { label: 'Situation normale', color: '#2563eb', icon: 'shield', role: 'status' },
   4: { label: 'Vigilance renforcée', color: '#16a34a', icon: 'eye', role: 'status' },
@@ -1024,6 +1025,8 @@ export function ModuleHero({ crumbs = [], eyebrow, title, desc, actions, stats =
   // Fil d'Ariane : chaînes, ou { label, onClick }. Onglets : chaînes, ou { label, icon, count }. Indicateurs : { label, value, trend, tone, icon }.
   const [own, setOwn] = useState(0);
   const tab = tabProp ?? own; const setTab = i => (onTab ? onTab(i) : setOwn(i));
+  // Commandement de l'Aurore (22/11) : l'insigne remplace l'icône du module et un tampon suit le titre.
+  const cmd = useUiTheme() === 'commandement';
   return (
     <header className="dsn-hero">
       {!!crumbs.length && (
@@ -1036,10 +1039,10 @@ export function ModuleHero({ crumbs = [], eyebrow, title, desc, actions, stats =
       )}
       <div className="dsn-hero__main">
         <div className="dsn-hero__id">
-          {icon && <span className="dsn-hero__icon"><Icon name={icon} size={22} /></span>}
+          {cmd ? <span className="dsn-hero__icon dsn-hero__icon--cmd"><CmdInsignia size={44} /></span> : icon && <span className="dsn-hero__icon"><Icon name={icon} size={22} /></span>}
           <div>
             {eyebrow && <div className="ds-eyebrow">{eyebrow}</div>}
-            <h2 className="dsn-hero__title">{title}</h2>
+            <h2 className="dsn-hero__title">{title}{cmd && <CmdStamp className="dsn-hero__stamp" tilt={-3}>Usage interne · CES</CmdStamp>}</h2>
             {desc && <p className="dsn-hero__desc">{desc}</p>}
           </div>
         </div>
@@ -1184,15 +1187,16 @@ export function PortalFooter({
   version = '1.0', columns = DEMO_COLS, LinkComponent,
   description = 'Corps Expéditionnaire Spatial — organisation francophone Star Citizen. Explorer ensemble, sans contraintes.',
   discordHref, statusHref, statusLabel = 'Tous les services sont opérationnels', statusMeta = 'Portail · Bot · Site officiel',
-  copyright = '© 2026 CES', onSeal,
+  copyright = '© 2026 CES', onSeal, product,
 }) {
+  // `product` (22/11) : titre du site après « CES », en dégradé d'aurore — « Application », « Uptime », « Aurore Design ».
   const { mode, setMode } = useColorScheme();
   const ext = { target: '_blank', rel: 'noopener noreferrer' };
   return (
     <footer className="dsn-ft">
       <div className="dsn-ft__top">
         <div className="dsn-ft__brand">
-          <div className="dsn-ft__logo"><img src={cesLogo} alt="" /><span className="ds-display">CES</span></div>
+          <div className="dsn-ft__logo"><img src={cesLogo} alt="" /><span className="ds-display">CES</span>{product && <span className="dsn-ft__product">{product}</span>}</div>
           <p>{description}</p>
           <a className="dsn-ft__discord" href={discordHref || '#ds-footer'} {...(discordHref ? ext : { onClick: inert })}><Icon name="discord" size={18} />Rejoindre le Discord</a>
         </div>
@@ -1329,5 +1333,60 @@ export function Chat({ missionImage }) {
         </form>
       </section>
     </div>
+  );
+}
+
+// -----------------------------------------------------------------------------
+// DS-CES-23 · En-tête du portail — ADOPTÉ le 22/11 (portail : navigation « En-tête » au choix du membre ; vitrine en
+// version barre). Proposé le même jour (demande du commandement : « propose un design de header »).
+// Barre horizontale pour les pages du portail, en complément de la barre latérale (DS-CES-11) :
+//   gauche  : icône du module + fil d'Ariane + titre de la page ;
+//   centre  : recherche (ouvre la palette Ctrl+K, DS-NAV-06) ;
+//   droite  : version de Star Citizen (liseré aurore), état DEFCON, SOS, notifications, compte (statut).
+// Trois variantes : `bar` (pleine largeur, collée en haut), `floating` (détachée, coins arrondis, ombre),
+// `minimal` (titre + actions, sans recherche — pages de lecture). Sous 720 px : la recherche devient une icône et le
+// fil d'Ariane se réduit au module. Liseré aurore en bas, animé en transform seulement (arrêté si « réduire les
+// animations ») ; 🔴 aucun backdrop-filter (élément collant : flou recalculé à chaque image, cf. règles GPU).
+// -----------------------------------------------------------------------------
+export function PortalHeader({
+  variant = 'bar', module = { icon: 'flag', label: 'Missions' }, crumbs = [], title, version = '4.3.2-LIVE',
+  defcon = 5, notifications = 0, user = { name: 'Pilote', status: 'online' }, onSearch, compact = false,
+}) {
+  const [menu, setMenu] = useState(false);
+  return (
+    <header className={`dsx-hdr dsx-hdr--${variant}${compact ? ' is-compact' : ''}`} role="banner">
+      <div className="dsx-hdr__left">
+        <span className="dsx-hdr__mod" aria-hidden="true"><Icon name={module.icon} size={18} /></span>
+        <div className="dsx-hdr__where">
+          <nav className="dsx-hdr__crumbs" aria-label="Fil d’Ariane">
+            <a href="#DS-CES-23">{module.label}</a>
+            {!compact && crumbs.map(c => <React.Fragment key={c}><Icon name="right" size={12} /><a href="#DS-CES-23">{c}</a></React.Fragment>)}
+          </nav>
+          {title && <strong className="dsx-hdr__title">{title}</strong>}
+        </div>
+      </div>
+      {variant !== 'minimal' && (compact
+        ? <button type="button" className="dsx-hdr__icon" aria-label="Rechercher (Ctrl+K)" onClick={onSearch}><Icon name="search" size={18} /></button>
+        : <button type="button" className="dsx-hdr__search" onClick={onSearch}><Icon name="search" size={16} /><span>Rechercher membres, vaisseaux, opérations…</span><kbd>Ctrl K</kbd></button>)}
+      <div className="dsx-hdr__right">
+        {!compact && <span className="dsx-hdr__ver" title="Version de Star Citizen">SC {version}</span>}
+        <span className={`dsx-hdr__dc dsx-hdr__dc--${defcon}`} title={`DEFCON ${defcon}`}><i />{compact ? defcon : `DEFCON ${defcon}`}</span>
+        <button type="button" className="dsx-hdr__icon dsx-hdr__sos" aria-label="Lancer un SOS"><Icon name="alert" size={18} /></button>
+        <button type="button" className="dsx-hdr__icon" aria-label={`Notifications${notifications ? ` (${notifications} non lues)` : ''}`}>
+          <Icon name="bell" size={18} />{notifications > 0 && <b className="dsx-hdr__count">{notifications > 9 ? '9+' : notifications}</b>}
+        </button>
+        <button type="button" className="dsx-hdr__me" aria-haspopup="menu" aria-expanded={menu} onClick={() => setMenu(v => !v)}>
+          <Avatar name={user.name} size="sm" shape="circle" status={user.status} />
+          {!compact && <span>{user.name}</span>}
+          {!compact && <Icon name="down" size={14} />}
+        </button>
+        {menu && (
+          <div className="dsx-hdr__menu" role="menu">
+            {['Mon profil', 'Mon statut', 'CES Compagnon', 'Thème'].map(l => <button key={l} type="button" role="menuitem" onClick={() => setMenu(false)}>{l}</button>)}
+            <hr /><button type="button" role="menuitem" className="is-danger" onClick={() => setMenu(false)}>Se déconnecter</button>
+          </div>
+        )}
+      </div>
+    </header>
   );
 }

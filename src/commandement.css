@@ -1,0 +1,47 @@
+/* AURORE DESIGN — Commandement de l'Aurore (DS-CMD-NN, V1.6). Préfixe dsc-. Repli ambre hors du thème. */
+.dsc-insignia { color: var(--cmd-a, #facc15); flex: none; }
+.dsc-stamp { display: inline-block; padding: 4px 10px; border: 2px solid currentColor; border-radius: 3px; font: 800 11px/1 var(--ds-font-mono, 'Ubuntu Mono', monospace); letter-spacing: .18em; text-transform: uppercase; transform: rotate(var(--tilt, -4deg)); opacity: .9; box-shadow: inset 0 0 0 1px currentColor; }
+.dsc-stamp--accent { color: var(--cmd-a, #facc15); } .dsc-stamp--danger { color: #f87171; } .dsc-stamp--ok { color: #4ade80; } .dsc-stamp--muted { color: #8b95ab; }
+.dsc-hazard { position: relative; height: 8px; border-radius: 1px; background: repeating-linear-gradient(-45deg, var(--cmd-a, #facc15) 0 8px, #0a0d17 8px 16px); margin: 6px 0; }
+.dsc-hazard span { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); padding: 2px 10px; background: #0a0d17; color: var(--cmd-a, #facc15); font: 700 10.5px var(--ds-font-mono, monospace); letter-spacing: .18em; text-transform: uppercase; border: 1px solid var(--cmd-a, #facc15); }
+.dsc-panel { position: relative; background: #0d111b; border: 1px solid color-mix(in srgb, var(--cmd-a, #facc15) 22%, transparent); border-radius: 4px; color: #e6ebf5; overflow: hidden; }
+.dsc-panel__bar { display: flex; align-items: center; gap: 10px; padding: 8px 12px; background: linear-gradient(90deg, color-mix(in srgb, var(--cmd-a, #facc15) 16%, #0a0d17), #0a0d17 70%); border-bottom: 1px solid color-mix(in srgb, var(--cmd-a, #facc15) 30%, transparent); font: 700 11.5px var(--ds-font-mono, monospace); letter-spacing: .14em; text-transform: uppercase; }
+.dsc-panel__title { color: var(--cmd-a, #facc15); flex: 1; min-width: 0; }
+.dsc-panel__bar code { color: #8b95ab; font: inherit; letter-spacing: .08em; }
+.dsc-panel__status { color: #4ade80; }
+.dsc-panel__body { padding: 14px; background-image: repeating-linear-gradient(0deg, rgba(255,255,255,.018) 0 1px, transparent 1px 3px); }
+.dsc-corner { position: absolute; width: 10px; height: 10px; border: 2px solid var(--cmd-a, #facc15); pointer-events: none; }
+.dsc-corner.tl { left: 3px; top: 3px; border-right: 0; border-bottom: 0; } .dsc-corner.tr { right: 3px; top: 3px; border-left: 0; border-bottom: 0; }
+.dsc-corner.bl { left: 3px; bottom: 3px; border-right: 0; border-top: 0; } .dsc-corner.br { right: 3px; bottom: 3px; border-left: 0; border-top: 0; }
+.dsc-readout { display: flex; flex-direction: column; gap: 4px; padding: 12px 14px; background: #05070c; border: 1px solid color-mix(in srgb, var(--cmd-a, #facc15) 18%, transparent); border-left: 3px solid var(--cmd-a, #facc15); border-radius: 3px; color: #e6ebf5; min-width: 0; }
+.dsc-readout__label { display: inline-flex; align-items: center; gap: 6px; font: 700 10.5px var(--ds-font-mono, monospace); letter-spacing: .14em; text-transform: uppercase; color: #8b95ab; }
+.dsc-readout__value { font: 700 30px/1 var(--ds-font-mono, monospace); color: var(--cmd-a, #facc15); letter-spacing: .02em; }
+.dsc-readout__value small { font-size: 12px; margin-left: 4px; color: #8b95ab; }
+.dsc-readout__hint { font-size: 12px; color: #8b95ab; }
+.dsc-lamp { width: 8px; height: 8px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 6px #4ade80; }
+.dsc-readout.is-warn .dsc-lamp { background: #fbbf24; box-shadow: 0 0 6px #fbbf24; } .dsc-readout.is-alert .dsc-lamp { background: #f87171; box-shadow: 0 0 6px #f87171; animation: dsc-blink 1.2s ease-in-out infinite; }
+@keyframes dsc-blink { 50% { opacity: .3; } }
+.dsc-plate { position: relative; display: inline-flex; flex-direction: column; align-items: center; gap: 2px; padding: 10px 26px; border-radius: 4px; background: linear-gradient(180deg, #1b2233, #0f1420); border: 1px solid color-mix(in srgb, var(--cmd-a, #facc15) 40%, transparent); box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 6px 14px rgba(0,0,0,.4); color: #e6ebf5; }
+.dsc-plate > i { position: absolute; width: 5px; height: 5px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #cbd5e1, #475569); }
+.dsc-plate > i:nth-of-type(1) { left: 6px; top: 6px; } .dsc-plate > i:nth-of-type(2) { right: 6px; top: 6px; } .dsc-plate > i:nth-of-type(3) { left: 6px; bottom: 6px; } .dsc-plate > i:nth-of-type(4) { right: 6px; bottom: 6px; }
+.dsc-plate__rank { font: 700 10px var(--ds-font-mono, monospace); letter-spacing: .2em; text-transform: uppercase; color: var(--cmd-a, #facc15); }
+.dsc-plate strong { font: 800 15px var(--ds-font); letter-spacing: .06em; text-transform: uppercase; }
+.dsc-plate code { font: 600 11px var(--ds-font-mono, monospace); color: #8b95ab; }
+.dsc-notice { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 8px 12px 8px 18px; position: relative; background: #0a0d17; color: #e6ebf5; border: 1px solid color-mix(in srgb, var(--cmd-a, #facc15) 35%, transparent); border-radius: 3px; font-size: 13px; }
+.dsc-notice::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: repeating-linear-gradient(-45deg, var(--cmd-a, #facc15) 0 6px, #0a0d17 6px 12px); }
+.dsc-notice__tag { font: 700 10.5px var(--ds-font-mono, monospace); letter-spacing: .16em; text-transform: uppercase; padding: 4px 8px; border: 1px solid var(--cmd-a, #facc15); color: var(--cmd-a, #facc15); border-radius: 2px; }
+.dsc-btn { display: inline-flex; align-items: center; gap: 8px; padding: 9px 18px; border: 1px solid var(--cmd-a, #facc15); font: 700 12.5px var(--ds-font-mono, monospace); letter-spacing: .14em; text-transform: uppercase; cursor: pointer; clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px); }
+.dsc-btn--solid { background: var(--cmd-a, #facc15); color: #0a0d17; } .dsc-btn--ghost { background: transparent; color: var(--cmd-a, #facc15); }
+.dsc-btn:hover { filter: brightness(1.08); } .dsc-btn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .dsc-readout.is-alert .dsc-lamp { animation: none; } }
+html[data-reduce-motion="on"] .dsc-readout.is-alert .dsc-lamp { animation: none; }
+/* Dans le portail, en apparence Commandement de l'Aurore */
+.dsn-hero__icon--cmd { background: transparent !important; width: auto; height: auto; }
+.dsn-hero__stamp { margin-left: 14px; vertical-align: middle; font-size: 10px; }
+@media (max-width: 700px) { .dsn-hero__stamp { display: none; } }
+/* 22/11 (le commandement) : le logo du CES n'est JAMAIS remplacé (barre latérale, en-tête) — l'insigne ne prend que la place de
+   l'icône de module de DS-CES-01. */
+html[data-ui="commandement"] .ds-ctile { border-radius: 3px; border-left: 3px solid var(--cmd-a, #facc15); background: #05070c; }
+html[data-ui="commandement"] :is(.ds-ctile__value, .dsn-hero__value, .stat-tile__value) { font-family: var(--ds-font-mono, monospace); color: var(--cmd-a, #facc15); }
+html[data-ui="commandement"] .dsn-ft { background: repeating-linear-gradient(-45deg, var(--cmd-a, #facc15) 0 8px, #0a0d17 8px 16px) top / 100% 5px no-repeat, #0a0d17; border-radius: 4px; }
+html[data-ui="commandement"] .dsn-ft__product { background: none; color: var(--cmd-a, #facc15); -webkit-text-fill-color: currentColor; }

@@ -1,9 +1,9 @@
 <p align="center"><img src="docs/images/banner.png" alt="CES Aurore Design" width="100%"></p>
 
 <p align="center">
-  <a href="https://aurore-design.ces-sc.fr"><img alt="Version" src="https://img.shields.io/badge/version-v1.5-7c9cff?style=flat-square"></a>
+  <a href="https://aurore-design.ces-sc.fr"><img alt="Version" src="https://img.shields.io/badge/version-v1.6-7c9cff?style=flat-square"></a>
   <a href="LICENSE"><img alt="Licence CC BY 4.0" src="https://img.shields.io/badge/licence-CC%20BY%204.0-a78bfa?style=flat-square"></a>
-  <img alt="Exemples" src="https://img.shields.io/badge/exemples-94-67e8f9?style=flat-square">
+  <img alt="Exemples" src="https://img.shields.io/badge/exemples-104-67e8f9?style=flat-square">
   <img alt="React" src="https://img.shields.io/badge/React-18%2B-5b8def?style=flat-square">
   <img alt="Thèmes" src="https://img.shields.io/badge/th%C3%A8mes-clair%20%C2%B7%20sombre-14163f?style=flat-square">
 </p>
@@ -27,7 +27,7 @@
 | | |
 |---|---|
 | 🎨 **Jetons à trois étages** | primitifs (bleu CES, nuit, aurore) → sémantiques (`--ds-surface-*`, `--ds-text*`, `--ds-primary`…) → composants. Aucune valeur brute dans un composant. |
-| 🧩 **94 exemples référencés** | boutons, champs, menus, dialogues, tableaux, calendrier, graphiques, éditeur riche, et des modèles CES (grades, certifications, DEFCON, messagerie…). |
+| 🧩 **104 exemples référencés** | boutons, champs, menus, dialogues, tableaux, calendrier, graphiques, éditeur riche, et des modèles CES (grades, certifications, DEFCON, messagerie…). |
 | 🔖 **Identifiants stables** | chaque exemple porte un code `DS-XXX-NN`, jamais renuméroté — on le cite pour désigner ou retoucher un composant. |
 | 🌗 **Clair, sombre, système** | chaque jeton est redéfini par mode ; « Système » suit l’OS en direct. |
 | ⚡ **Sobre pour le GPU** | animations en `transform` / `opacity`, pas de flou sur les éléments fixes, pause hors écran, « réduire les animations » respecté. |
@@ -66,7 +66,7 @@ export default function App() {
     </DsRoot>
   );
 }
-// Basé sur CES Aurore Design v1.5
+// Basé sur CES Aurore Design v1.6
 ```
 
 - Les styles vivent sous `.ds` : rien ne déborde sur le reste de la page.
@@ -78,7 +78,7 @@ export default function App() {
 
 | Version | Où | Statut |
 |---|---|---|
-| **v1.5** | ce dépôt · [version en test](https://experimental-systems.ces-sc.fr/design-system) | dernière publiée |
+| **v1.6** | ce dépôt · [version en test](https://experimental-systems.ces-sc.fr/design-system) | dernière publiée |
 | déployée | [aurore-design.ces-sc.fr](https://aurore-design.ces-sc.fr/design-system) | en service sur le portail du CES |
 
 Le journal détaillé de chaque version est dans [docs/AURORE-DESIGN.md](docs/AURORE-DESIGN.md#journal).
@@ -89,7 +89,7 @@ CES Aurore Design est publié sous **[Creative Commons Attribution 4.0 Internati
 
 Tu peux **utiliser, copier, modifier et redistribuer**, y compris commercialement et **par une IA**, à condition de **créditer** :
 
-> **Basé sur CES Aurore Design v1.5 — Corps Expéditionnaire Spatial — CC BY 4.0**
+> **Basé sur CES Aurore Design v1.6 — Corps Expéditionnaire Spatial — CC BY 4.0**
 
 …de façon visible (pied de page, crédits, README ou en-tête de fichier), avec un lien vers la licence et la mention des modifications.
 Ne sont pas couverts : le nom et les logos du CES, les marques Star Citizen® / Squadron 42® / RSI®, les captures, les polices (SIL OFL) et les icônes Remix Icon.

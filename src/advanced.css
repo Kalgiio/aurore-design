@@ -306,7 +306,10 @@
 .ds-cal-ctx .ds-menu__heading::first-letter { text-transform: uppercase; }
 
 /* Bandeau d'alerte DEFCON : pousse toute la page */
-html.ds-alert-on body { padding-top: var(--ces-alert-h, 44px); }
+/* --ces-top = bandeau DEFCON + bannière du site de test (components/TestEnvBanner.js) : tout élément collant / fixe
+   ajoute var(--ces-top, 0px) à son `top`. */
+:root { --ces-top: calc(var(--ces-alert-h, 0px) + var(--ces-test-h, 0px) + var(--ces-tb-h, 0px)); }
+html.ds-alert-on body, html.ces-test-env body, html.ces-topbar body { padding-top: var(--ces-top, 44px); }
 body { transition: padding-top .35s cubic-bezier(.2, .7, .2, 1); }
 /* --- DS-CES-10 · DEFCON « salle de commandement » (adopté le 2026-11-14) ---------------------------------------
    Palette FIXE (console sombre) dans les deux thèmes : c'est un écran de commandement, pas une surface du portail.
@@ -314,7 +317,7 @@ body { transition: padding-top .35s cubic-bezier(.2, .7, .2, 1); }
 .ds.dcc, .ds.dca, .ds.dch { --dcc-bg: #07090f; --dcc-panel: #0d111b; --dcc-line: rgba(255,255,255,.1); --dcc-txt: #e6ebf5; --dcc-dim: #8b95ab; }
 
 /* Bandeau */
-.ds.dcc { position: fixed; z-index: 3000; top: 0; left: 0; right: 0; display: flex; align-items: stretch; gap: 0;
+.ds.dcc { position: fixed; z-index: 3000; top: var(--ces-test-h, 0px); left: 0; right: 0; display: flex; align-items: stretch; gap: 0;
   padding-top: env(safe-area-inset-top, 0px); background: var(--dcc-bg); color: var(--dcc-txt); font-family: var(--ds-font-mono);
   border-bottom: 2px solid var(--dc); box-shadow: 0 8px 28px -10px color-mix(in srgb, var(--dc) 80%, transparent);
   animation: dcc-in .38s cubic-bezier(.2, .9, .25, 1); overflow: hidden; isolation: isolate; }
@@ -698,3 +701,62 @@ button.ds-chatmem__item { cursor: pointer; } button.ds-chatmem__item:hover { bac
 /* Logo RSI dans un lien (DS-CES-22, Aurore Design 1.5) — à la hauteur du texte, couleur du lien. */
 .ds .ds-rsi { height: .78em; width: auto; flex: none; vertical-align: -0.05em; margin-left: 6px; }
 .ds .dsn-ft a:has(.ds-rsi) { display: inline-flex; align-items: center; }
+
+/* DS-CES-12 · titre du site après « CES » (22/11) : « Application », « Uptime », « Aurore Design » en dégradé d'aurore */
+.dsn-ft__product { margin-left: -2px; font-family: var(--ds-font-display, 'Orbitron', sans-serif); font-weight: 900; font-size: 1.15rem; letter-spacing: .04em; background: var(--ds-aurora); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* --- DS-CES-23 · En-tête du portail (ADOPTÉ le 22/11) ------------------------------------------------------
+   Classes .dsx-hdr*. Couleurs = jetons sémantiques (clair et sombre). */
+.dsx-hdr { position: relative; display: flex; align-items: center; gap: 14px; min-width: 0; padding: 10px 16px; min-height: 60px;
+  background: var(--ds-surface-overlay); border-bottom: 1px solid var(--ds-border); color: var(--ds-text); }
+.dsx-hdr::after { content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; overflow: hidden; pointer-events: none;
+  background: linear-gradient(90deg, transparent, var(--ces-aurora-violet, #7c5cff), var(--ces-aurora-cyan, #22d3ee), transparent) 0 0 / 50% 100% repeat-x;
+  opacity: .8; transform-origin: 0 50%; animation: dsx-hdr-line 9s linear infinite; }
+@keyframes dsx-hdr-line { from { transform: translateX(-50%) scaleX(2); } to { transform: translateX(0) scaleX(2); } }
+.dsx-hdr--floating { margin: 12px; border: 1px solid var(--ds-border); border-radius: 18px; box-shadow: 0 14px 34px -18px rgba(0, 0, 0, .55); }
+.dsx-hdr--floating::after { left: 18px; right: 18px; border-radius: 2px; }
+.dsx-hdr--minimal { background: transparent; border-bottom-color: transparent; }
+.dsx-hdr--minimal::after { opacity: .45; }
+.dsx-hdr__left { display: flex; align-items: center; gap: 10px; min-width: 0; flex: 0 1 auto; }
+.dsx-hdr__mod { width: 38px; height: 38px; flex: none; display: grid; place-items: center; border-radius: 11px; color: #fff;
+  background: linear-gradient(135deg, var(--ces-aurora-violet, #7c5cff), var(--ces-aurora-blue, #3b82f6)); }
+.dsx-hdr__where { display: flex; flex-direction: column; min-width: 0; }
+.dsx-hdr__crumbs { display: flex; align-items: center; gap: 4px; font-size: 12px; color: var(--ds-text-muted); min-width: 0; white-space: nowrap; overflow: hidden; }
+.dsx-hdr__crumbs a { color: inherit; text-decoration: none; } .dsx-hdr__crumbs a:hover { color: var(--ds-primary); }
+.dsx-hdr__title { font-size: 16px; line-height: 1.25; overflow-wrap: anywhere; }
+.dsx-hdr__search { flex: 1 1 260px; max-width: 520px; margin: 0 auto; display: flex; align-items: center; gap: 8px; height: 38px; padding: 0 8px 0 12px; min-width: 0;
+  border: 1px solid var(--ds-border); border-radius: 12px; background: var(--ds-surface-sunken, transparent); color: var(--ds-text-muted); font: inherit; font-size: 13px; cursor: text; text-align: left; }
+.dsx-hdr__search span { flex: 1; min-width: 0; overflow: hidden; white-space: nowrap; }
+.dsx-hdr__search:hover { border-color: color-mix(in srgb, var(--ds-primary) 50%, var(--ds-border)); }
+.dsx-hdr__search kbd { font: 600 10.5px var(--ds-font-mono); padding: 2px 6px; border-radius: 6px; border: 1px solid var(--ds-border); color: var(--ds-text-muted); }
+.dsx-hdr__right { display: flex; align-items: center; gap: 6px; margin-left: auto; flex: none; position: relative; }
+.dsx-hdr__ver { font: 600 11px var(--ds-font-mono); padding: 4px 9px; border-radius: 999px; border: 1px solid transparent;
+  background: linear-gradient(var(--ds-surface-overlay), var(--ds-surface-overlay)) padding-box, linear-gradient(90deg, var(--ces-aurora-violet, #7c5cff), var(--ces-aurora-cyan, #22d3ee)) border-box; }
+.dsx-hdr__dc { display: inline-flex; align-items: center; gap: 6px; font: 700 11px var(--ds-font-mono); letter-spacing: .04em; padding: 4px 9px; border-radius: 999px; --c: #22c55e;
+  color: var(--c); background: color-mix(in srgb, var(--c) 12%, transparent); border: 1px solid color-mix(in srgb, var(--c) 35%, transparent); }
+.dsx-hdr__dc i { width: 7px; height: 7px; border-radius: 50%; background: var(--c); }
+.dsx-hdr__dc--4 { --c: #3b82f6; } .dsx-hdr__dc--3 { --c: #f59e0b; } .dsx-hdr__dc--2 { --c: #f97316; } .dsx-hdr__dc--1 { --c: #ef4444; }
+.dsx-hdr__dc--1 i, .dsx-hdr__dc--2 i { animation: dsx-hdr-blink 1.2s ease-in-out infinite; }
+@keyframes dsx-hdr-blink { 50% { opacity: .25; } }
+.dsx-hdr__icon { position: relative; width: 38px; height: 38px; display: grid; place-items: center; border: 1px solid transparent; border-radius: 11px; background: none; color: var(--ds-text-muted); cursor: pointer; }
+.dsx-hdr__icon:hover, .dsx-hdr__icon:focus-visible { color: var(--ds-text); background: color-mix(in srgb, var(--ds-primary) 10%, transparent); border-color: var(--ds-border); }
+.dsx-hdr__sos:hover { color: var(--ds-danger); background: color-mix(in srgb, var(--ds-danger) 12%, transparent); }
+.dsx-hdr__count { position: absolute; top: 3px; right: 3px; min-width: 16px; height: 16px; padding: 0 4px; border-radius: 999px; background: var(--ds-danger); color: #fff; font: 700 10px/16px var(--ds-font); }
+.dsx-hdr__me { display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 8px 0 4px; border: 1px solid var(--ds-border); border-radius: 999px; background: none; color: var(--ds-text); font: inherit; font-weight: 600; font-size: 13px; cursor: pointer; }
+.dsx-hdr__me:hover { border-color: var(--ds-primary); }
+.dsx-hdr__menu { position: absolute; top: calc(100% + 8px); right: 0; z-index: 5; min-width: 190px; padding: 6px; display: flex; flex-direction: column;
+  border: 1px solid var(--ds-border); border-radius: 12px; background: var(--ds-surface-overlay); box-shadow: 0 18px 40px -16px rgba(0, 0, 0, .5); }
+.dsx-hdr__menu button { text-align: left; padding: 8px 10px; border: 0; border-radius: 8px; background: none; color: var(--ds-text); font: inherit; font-size: 13px; cursor: pointer; }
+.dsx-hdr__menu button:hover { background: color-mix(in srgb, var(--ds-primary) 10%, transparent); }
+.dsx-hdr__menu .is-danger { color: var(--ds-danger); }
+.dsx-hdr__menu hr { border: 0; border-top: 1px solid var(--ds-border); margin: 4px 0; }
+.dsx-hdr.is-compact { gap: 8px; padding: 8px 10px; }
+.dsx-hdr.is-compact .dsx-hdr__mod { width: 34px; height: 34px; }
+.dsx-hdr.is-compact .dsx-hdr__title { font-size: 14.5px; }
+@media (prefers-reduced-motion: reduce) { .dsx-hdr::after, .dsx-hdr__dc i { animation: none; } }
+/* Démonstration (vitrine) : page fictive sous l'en-tête, largeur bureau / mobile */
+.dsp-hdr-demo { display: flex; flex-direction: column; gap: 12px; }
+.dsp-hdr-stage { border: 1px solid var(--ds-border); border-radius: 16px; overflow: hidden; background: var(--mui-palette-background-default, #050511); margin: 0 auto; width: 100%; transition: max-width .25s; }
+.dsp-hdr-stage.is-mobile { max-width: 390px; }
+.dsp-hdr-page { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; padding: 14px; }
+.dsp-hdr-page i { height: 70px; border-radius: 12px; border: 1px solid var(--ds-border); background: var(--ds-surface-card); }

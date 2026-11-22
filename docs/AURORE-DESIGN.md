@@ -87,6 +87,12 @@ import CesEditor from '../design-system/editor/CesEditor';                     /
 - `DS-CES-20` **Héros au ciel horaire** (vitrine : capture Squadron 42 choisie selon l'heure locale, avant la peinture).
 - `DS-CES-21` **Bandeau défilant** (boucle sans saut, arrêt au survol et en « réduire les animations »).
 - `DS-CES-22` **Logo RSI** (`RsiLogo`, lien de pied `{ rsi: true }`), à la place du mot « RSI ».
+- ✅ **V1.6 (22/11) — « Commandement de l'Aurore »** : famille `DS-CMD-01…09` (`design-system/commandement.js` / `.css`) —
+  insigne, tampon de classification, bande réglementaire, panneau de console, afficheur, plaque de grade, avis officiel,
+  bouton de commandement, palette et couleurs d'accent (`--cmd-a`). C'est l'apparence complète « Commandement de
+  l'Aurore » du portail (`theme/ui-commandement.css`).
+- ✅ `DS-CES-23` **En-tête du portail** ADOPTÉ (22/11) : `PortalHeader` + `.dsx-hdr*` dans `advanced.js` / `advanced.css` —
+  navigation « En-tête » du portail au choix du membre, version barre sur le site vitrine.
 - Site vitrine entièrement refait en plusieurs pages (« Aurore cinématique », `vitrine/src/styles/x.css`).
 
 ### V1.4 — 2026-11-14
